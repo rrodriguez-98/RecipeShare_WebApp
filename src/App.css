@@ -1,0 +1,106 @@
+#root {
+  /* max-width: 1280px;*/
+  margin: 0 auto; 
+  padding: 2rem;
+  text-align: center;
+}
+
+/* body {
+  padding-top:70px;
+} */
+
+.font-light{
+  color:#fdf9f7;
+}
+
+.login-container{
+  background-color: #ae2012;
+  padding: 5%;
+  border-radius: 20px;
+}
+
+.form-control:hover {
+  border-color: #A14D4D; 
+  background-color: #fdf9f7; 
+  box-shadow: 0 0 0 0.2rem rgba(230, 220, 220, 0.849);
+  transition: all 0.2s ease-in-out;
+}
+
+input.form-control:focus {
+  border-color: #A14D4D; 
+  background-color: #fdf9f7; 
+  box-shadow: 0 0 0 0.2rem rgba(230, 220, 220, 0.849); 
+  transition: all 0.2s ease-in-out;
+}
+
+.login-button {
+  border-radius: 25px;
+  border: none;
+  color: lch(37.76% 32.8 24.95);
+}
+
+.login-button:hover, .login-button:active {
+  border-radius: 20px;
+  color: #A14D4D;
+}
+
+.signup-container{
+  background-color: #ae2012;
+  border-radius: 15px;
+}
+
+.signup-field-input{
+  background-color: #fdf9f7;
+  padding: 20px;
+  margin: 30px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-field-single-input{
+  text-align: left;
+}
+
+.signup-button{
+  border-radius: 25px;
+  border: none;
+}
+
+input[type="checkbox"] {
+  accent-color: black; 
+  transform: scale(1.2); 
+}
+
+.checkbox-conditions{
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-menu{
+  padding-top: 90px;
+  text-align: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.side-panel{
+  padding-top: 90px;
+}
+
+.recipe-post{
+  display: flex;
+  justify-content: center;
+}
+
+.tag {
+  background-color: #374151;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin: 0 4px;
+  color: white;
+}
