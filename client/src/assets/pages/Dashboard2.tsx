@@ -20,7 +20,8 @@ const forumData = {
   desserts: [
     { id: 8, title: "Chocolate Lava Cake Recipe", author: "SweetTooth", replies: 45, lastPost: "1 hour ago" },
     { id: 9, title: "No-Bake Cheesecake", author: "DessertLover", replies: 22, lastPost: "5 hours ago" }
-  ]
+  ],
+  test : []
 };
 
 export default function Dashboard() {
@@ -36,6 +37,7 @@ export default function Dashboard() {
       case 'ingredients': return forumData.ingredients;
       case 'firstTime': return forumData.firstTime;
       case 'desserts': return forumData.desserts;
+      case 'test' : return forumData.test;
       default: return forumData.main;
     }
   };
@@ -46,6 +48,7 @@ export default function Dashboard() {
       case 'ingredients': return '5 Ingredients or Less';
       case 'firstTime': return 'First Time Recipes';
       case 'desserts': return 'Desserts';
+      case 'test' : return 'Test';
       default: return 'Main Forum';
     }
   };
@@ -81,6 +84,13 @@ export default function Dashboard() {
             style={{border: 'none', background: 'none'}}
           >
             Desserts
+          </button>
+          <button 
+            className={`nav-link text-start ${activeSection === 'test' ? 'active' : ''}`}
+            onClick={() => handleSectionChange('test')}
+            style={{border: 'none', background: 'none'}}
+          >
+            Test
           </button>
         </nav>
       </section>
