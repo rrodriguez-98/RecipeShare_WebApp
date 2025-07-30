@@ -135,7 +135,7 @@ input[type="checkbox"] {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 24px;
+  padding: 29px;
   max-width: 400px;
   width: 100%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -147,4 +147,26 @@ input[type="checkbox"] {
   font-size: 20px;
   float: right;
   cursor: pointer;
+}
+
+#close-btn-new-recipe {
+  position: relative;
+  top: -5px;
+  left: 200px;
+}
+
+.text-align-left{
+  position: relative;
+  right: 125px;
+}
+
+.modal-footer{
+  gap: 150px;
+  position: relative;
+  top: 15px;
+  margin-bottom: 5px;
+}
+
+#recipeSteps{
+  margin-bottom: 5px;
 }

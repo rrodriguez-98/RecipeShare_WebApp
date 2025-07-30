@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type ForumSection = 'main' | 'ingredients' | 'firstTime' | 'desserts';
+type ForumSection = 'main' | 'ingredients' | 'firstTime' | 'desserts' | 'test';
 
 // Sample data - replace with your actual data/API calls
 const forumData = {

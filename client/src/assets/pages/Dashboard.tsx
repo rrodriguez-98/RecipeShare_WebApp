@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import type { ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import testImg from '../../../public/test-img.png'
 
 type ForumSection = 'main' | 'five-ingredients' | 'heirloom-recipes' | 'cultural-wonders' | 'healthy-beverages' |'healthy-desserts'| 'test';
@@ -46,10 +48,43 @@ type ForumPost = {
 export default function Dashboard() {
 
     const [activeSection, setActiveSection] = useState('main');
+    const [formData, setFormData] = useState({ name: '', recipeName: '', ingredients: '', recipeSteps: '' });
+    const navigate = useNavigate();
 
     const handleSectionChange = (section: ForumSection) => {
     setActiveSection(section);
   };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const API_BASE_URL = import.meta.env.REACT_APP_API_URL || 'http://localhost:3000';
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Send data to server
+    const res = await fetch(`${API_BASE_URL}/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    });
+
+    const text = await res.text();
+    console.log('Status:', res.status);
+    console.log('Response:', text);
+
+    if (res.ok) {
+    setFormData({ name: '', recipeName: '', ingredients: '', recipeSteps: '' });    
+    navigate('/create');
+    } else {
+    alert(`Something went wrong! Status: ${res.status}`);
+    }
+    
+  };
+
 
   const getCurrentData = (): ForumPost[] => {
     switch(activeSection) {
@@ -136,28 +171,27 @@ export default function Dashboard() {
                 <div className="modal-backdrop-light">
                   <div className="modal-box-light">
                     <div className="modal-header">
-                      <h5>Modal Title</h5>
-                      <button onClick={() => setShowModal(false)} className="close-button">&times;</button>
+                      <h5>New Recipe</h5>
+                      <button onClick={() => setShowModal(false)} className="close-button" id="close-btn-new-recipe">&times;</button>
                     </div>
                     <div className="modal-body">
-                      <form action="/submit" method="post">
-                          <label >Name:</label>
-                          <input type="text" id="name" name="name" required/><br></br>
+                      <form onSubmit={handleSubmit}>
+                          <label className="text-align-left">Name:</label>
+                          <input className="form-control" type="text" id="name" name="name" value={formData.name} onChange={handleChange} required/><br></br>
                           
-                          <label >Recipe Name:</label>
-                          <input type="email" id="email" name="email" required/><br></br>
+                          <label className="text-align-left">Recipe Name:</label>
+                          <input className="form-control" type="text" id="recipeName" name="recipeName" value={formData.recipeName} onChange={handleChange} required/><br></br>
                           
-                          <label >Ingredients:</label>
-                          <textarea id="message" name="message"></textarea><br></br>
+                          <label className="text-align-left">Ingredients:</label>
+                          <textarea className="form-control" id="ingredients" name="ingredients" value={formData.ingredients} onChange={handleChange} required></textarea><br></br>
 
-                          <label >Recipe Steps:</label>
-                          <textarea id="message" name="message"></textarea>
+                          <label className="text-align-left">Recipe Steps:</label>
+                          <textarea className="form-control" id="recipeSteps" name="recipeSteps" value={formData.recipeSteps} onChange={handleChange} required></textarea>
+                          <div className="modal-footer">
+                            <button onClick={() => setShowModal(false)} className="btn btn-secondary">Close</button>
+                            <button className="btn btn-primary">Save changes</button>
+                          </div>
                       </form>
-
-                    </div>
-                    <div className="modal-footer">
-                      <button onClick={() => setShowModal(false)} className="btn btn-secondary">Close</button>
-                      <button className="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                 </div>
