@@ -9,6 +9,7 @@ import Settings from './assets/pages/Settings'
 import Register from './assets/pages/register';
 import Dashboard from './assets/pages/dashboard';
 import Dashboard2 from './assets/pages/dashboard2';
+import Dashboard3 from './assets/pages/Dashboard3';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard3 />} />
       </Routes>
       </BrowserRouter>
     </>
