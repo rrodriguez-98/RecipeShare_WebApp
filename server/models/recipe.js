@@ -27,6 +27,12 @@ const recipeSchema = new mongoose.Schema({
         type: Number,
         min: [5, 'Minimum allowed recipe duration is 5 minutes'],
     }
+    ,
+    forumSection: {
+    type: String,
+    required: [true, 'Forum section is required'],
+    enum: ['main', 'five-ingredients', 'heirloom-recipes', 'cultural-wonders', 'healthy-beverages', 'healthy-desserts'] // Optional: restrict to valid sections
+  }
 }, {
     timestamps: true //adds createdAt and updatedAt
 });
