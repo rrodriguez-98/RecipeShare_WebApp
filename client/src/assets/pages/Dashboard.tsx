@@ -51,6 +51,8 @@ export default function Dashboard() {
     const [formData, setFormData] = useState({ name: '', recipeName: '', ingredients: '', recipeSteps: '' });
     const navigate = useNavigate();
 
+    const postData = {...formData, forumSection: activeSection};
+
     const handleSectionChange = (section: ForumSection) => {
     setActiveSection(section);
   };
@@ -66,15 +68,25 @@ export default function Dashboard() {
     e.preventDefault();
 
     // Send data to server
+    // const res = await fetch(`${API_BASE_URL}/create`, {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //   body: new URLSearchParams(postData).toString()
+    // });
     const res = await fetch(`${API_BASE_URL}/create`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData).toString()
+      headers: { 
+        'Content-Type': 'application/json',  // Changed to JSON
+      },
+      body: JSON.stringify(postData)  // Changed to JSON.stringify
     });
 
-    const text = await res.text();
+    const result = await res.json();
     console.log('Status:', res.status);
-    console.log('Response:', text);
+    console.log('Response:', result);
+    // const text = await res.text();
+    // console.log('Status:', res.status);
+    // console.log('Response:', text);
 
     if (res.ok) {
     setFormData({ name: '', recipeName: '', ingredients: '', recipeSteps: '' });    
@@ -171,7 +183,7 @@ export default function Dashboard() {
                 <div className="modal-backdrop-light">
                   <div className="modal-box-light">
                     <div className="modal-header">
-                      <h5>New Recipe</h5>
+                      <h5>New Recipe in {getSectionTitle()}</h5>
                       <button onClick={() => setShowModal(false)} className="close-button" id="close-btn-new-recipe">&times;</button>
                     </div>
                     <div className="modal-body">
